@@ -2,7 +2,6 @@ package com.example.totemhighlight;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.world.entity.HumanoidArm;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -12,6 +11,9 @@ public final class HighlightRenderer {
 
     private static final int GOLD = 0xFFC933;
     private static final int LIGHT_GOLD = 0xFFF1A6;
+
+    /** Zeitpunkt, an dem zuletzt im Inventar-Fenster markiert wurde (verhindert doppelte Markierung in der Hotbar). */
+    private static long lastInventoryDraw = 0;
 
     private HighlightRenderer() {}
 
@@ -23,6 +25,9 @@ public final class HighlightRenderer {
         float fade = TotemHighlight.intensity();
         if (fade <= 0f) {
             return;
+        }
+        if (!wide) {
+            lastInventoryDraw = System.currentTimeMillis();
         }
         // sanftes Pulsieren (ca. 1,4x pro Sekunde)
         float pulse = 0.5f + 0.5f * (float) Math.sin(System.currentTimeMillis() / 110.0);
@@ -45,10 +50,14 @@ public final class HighlightRenderer {
         if (TotemHighlight.intensity() <= 0f) {
             return;
         }
+        // Ist gerade das Inventar offen, uebernimmt die Inventar-Markierung
+        if (System.currentTimeMillis() - lastInventoryDraw < 150) {
+            return;
+        }
         Minecraft mc = Minecraft.getInstance();
         Player player = mc.player;
-        if (player == null || mc.screen instanceof AbstractContainerScreen<?>) {
-            return; // im Inventar uebernimmt die Inventar-Markierung
+        if (player == null) {
+            return;
         }
 
         int width = mc.getWindow().getGuiScaledWidth();
