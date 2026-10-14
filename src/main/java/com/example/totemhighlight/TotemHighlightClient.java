@@ -9,6 +9,7 @@ public class TotemHighlightClient implements ClientModInitializer {
 
     @Override
     public void onInitializeClient() {
+        InventoryHighlight.register();
         HudElementRegistry.attachElementAfter(
                 VanillaHudElements.HOTBAR,
                 Identifier.fromNamespaceAndPath("totemhighlight", "hotbar_highlight"),

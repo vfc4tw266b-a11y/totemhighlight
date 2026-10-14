@@ -1,6 +1,6 @@
 # Totem Highlight (Fabric, Minecraft Java 26.2)
 
-Client-Mod. Wird dein Totem ausgeloest, werden 2 Sekunden lang alle Totems in Inventar UND Hotbar
+Client-Mod. Wird dein Totem ausgeloest, werden 3 Sekunden lang alle Totems in Inventar UND Hotbar
 (inkl. Offhand) mit einem pulsierenden goldenen Glow markiert; am Ende blendet er weich aus.
 
 Dauer aendern: DURATION_MS in TotemHighlight.java.

@@ -3,10 +3,10 @@ package com.example.totemhighlight;
 public final class TotemHighlight {
 
     /** Gesamtdauer der Markierung nach einem Pop (Millisekunden). */
-    public static final long DURATION_MS = 2000;
+    public static final long DURATION_MS = 3000;
 
     /** Die letzten Millisekunden, in denen die Markierung ausblendet. */
-    public static final long FADE_MS = 600;
+    public static final long FADE_MS = 700;
 
     private static long start = -1;
 

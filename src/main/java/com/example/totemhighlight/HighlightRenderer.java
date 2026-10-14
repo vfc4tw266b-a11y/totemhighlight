@@ -29,20 +29,22 @@ public final class HighlightRenderer {
         if (!wide) {
             lastInventoryDraw = System.currentTimeMillis();
         }
-        // sanftes Pulsieren (ca. 1,4x pro Sekunde)
+        // sanftes Pulsieren (ca. 1,4x pro Sekunde), bleibt dabei immer kraeftig sichtbar
         float pulse = 0.5f + 0.5f * (float) Math.sin(System.currentTimeMillis() / 110.0);
-        float a = fade * (0.72f + 0.28f * pulse);
+        float a = fade * (0.82f + 0.18f * pulse);
 
-        // leichte goldene Toenung, Item bleibt gut sichtbar
-        g.fill(x, y, x + 16, y + 16, argb(a * 0.20f, GOLD));
+        // goldene Toenung ueber dem Item (Item bleibt erkennbar)
+        g.fill(x, y, x + 16, y + 16, argb(a * 0.32f, GOLD));
 
         // Glow-Ringe von aussen nach innen, abgerundete Ecken
         if (wide) {
-            outline(g, x - 3, y - 3, x + 19, y + 19, argb(a * 0.14f, GOLD));
+            outline(g, x - 3, y - 3, x + 19, y + 19, argb(a * 0.24f, GOLD));
         }
-        outline(g, x - 2, y - 2, x + 18, y + 18, argb(a * 0.32f, GOLD));
+        outline(g, x - 2, y - 2, x + 18, y + 18, argb(a * 0.58f, GOLD));
         // heller Rahmen direkt um den Slot
         outline(g, x - 1, y - 1, x + 17, y + 17, argb(a, LIGHT_GOLD));
+        // feiner Innenrahmen fuer mehr Kontrast
+        outline(g, x, y, x + 16, y + 16, argb(a * 0.50f, LIGHT_GOLD));
     }
 
     /** Hotbar-Markierung (wird nach der Vanilla-Hotbar gezeichnet). */
