@@ -1,5 +1,6 @@
 package com.example.totemhighlight;
 
+import com.example.totemhighlight.mixin.AbstractContainerScreenAccessor;
 import net.fabricmc.fabric.api.client.screen.v1.ScreenEvents;
 import net.minecraft.client.gui.GuiGraphicsExtractor;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
@@ -23,8 +24,9 @@ public final class InventoryHighlight {
         if (TotemHighlight.intensity() <= 0f) {
             return;
         }
-        int left = screen.getLeftPos();
-        int top = screen.getTopPos();
+        AbstractContainerScreenAccessor access = (AbstractContainerScreenAccessor) screen;
+        int left = access.totemhighlight$getLeftPos();
+        int top = access.totemhighlight$getTopPos();
         for (Slot slot : screen.getMenu().slots) {
             if (HighlightRenderer.isTotem(slot.getItem())) {
                 HighlightRenderer.draw(g, left + slot.x, top + slot.y, false);

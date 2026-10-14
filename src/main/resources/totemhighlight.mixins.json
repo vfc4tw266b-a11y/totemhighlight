@@ -3,7 +3,8 @@
   "package": "com.example.totemhighlight.mixin",
   "compatibilityLevel": "JAVA_25",
   "client": [
-    "ClientPacketListenerMixin"
+    "ClientPacketListenerMixin",
+    "AbstractContainerScreenAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
